@@ -64,7 +64,7 @@ def main():
         return
 
     # Cria uma pasta para salvar as fotos
-    save_dir = 'captured_images'
+    save_dir = 'captured_images/bad'
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
@@ -96,7 +96,7 @@ def main():
 
             # Verifica transição de estado (vermelho saindo e entrando novamente)
             if red_detected and not red_last_detected:
-                # Espera 2 segundos exibindo a contagem na tela
+                # Espera 1 segundo exibindo a contagem na tela
                 for i in range(2, 0, -1):
                     countdown_frame = frame.copy()
                     cv2.putText(countdown_frame, f'Tirando foto em {i}s', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1,
@@ -104,11 +104,14 @@ def main():
                     cv2.imshow('CAM', countdown_frame)
                     cv2.waitKey(1000)  # espera 1 segundo
 
-                # Tira a foto
-                image_path = save_image(frame, save_dir, counter)
-                counter += 1
-                flash_frames = 5  # exibe o flash por 5 frames
-                flash_color = (0, 255, 0)  # verde para indicar sucesso
+                # Captura um novo frame após a contagem regressiva
+                ret, frame = cap.read()
+                if ret:
+                    # Tira a foto
+                    image_path = save_image(frame, save_dir, counter)
+                    counter += 1
+                    flash_frames = 5  # exibe o flash por 5 frames
+                    flash_color = (0, 255, 0)  # verde para indicar sucesso
 
             # Atualiza o estado anterior de detecção de vermelho
             red_last_detected = red_detected
