@@ -3,7 +3,7 @@ import tensorflow as tf
 import sys
 
 # Load the pre-trained model
-model = tf.keras.models.load_model("C:/Users/aluno/Desktop/TCC_SENAI_IA/checkpoints/model.keras")
+model = tf.keras.models.load_model("checkpoints/model.keras")
 
 maybeResults = ["bad", "good"]
 
@@ -13,7 +13,7 @@ def main():
     wordResults = []
     
     for i in range(nImages):    
-        img = "C:/Users/aluno/Desktop/TCC_SENAI_IA/processed_images/test/" + str(i) + ".png"
+        img = "processed_images/test/" + str(i) + ".png"
         data = np.array([tf.keras.utils.load_img(img)])
            
         # Perform prediction using the loaded model

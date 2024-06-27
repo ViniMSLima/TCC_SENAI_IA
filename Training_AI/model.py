@@ -6,7 +6,7 @@ epochs = 500
 batch_size = 32
 patience = 10
 learning_rate = 0.0001
-model_path = 'checkpoints/model.keras'
+model_path = 'checkpoints/model2.keras'
 exists = os.path.exists(model_path)
 
 model = models.load_model(model_path) \
@@ -52,7 +52,7 @@ else:
     )
 
 train = utils.image_dataset_from_directory(
-    "processed_images",
+    "processed_images/images",
     validation_split=0.2,
     subset="training",
     seed=123,
@@ -62,7 +62,7 @@ train = utils.image_dataset_from_directory(
 )
 
 test = utils.image_dataset_from_directory(
-    "processed_images",
+    "processed_images/images",
     validation_split=0.2,
     subset="validation",
     seed=123,
