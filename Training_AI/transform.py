@@ -37,7 +37,7 @@ def resize_and_process_image(image_path, output_dir, index, size=(128, 128)):
     img_resized = cv.resize(img_binary, size)
 
     # Salva a imagem resultante em formato PNG
-    output_path = os.path.join(output_dir, f"{index}.png")
+    output_path = os.path.join(output_dir, "0.png")
     cv.imwrite(output_path, img_resized, [cv.IMWRITE_PNG_COMPRESSION, 9])
     print(f"Imagem salva: {output_path}")
 
@@ -55,7 +55,7 @@ def process_images_from_directory(directory, output_dir):
                 image_index += 1
 
 print("transforming")
-directory = 'captured_images'
+directory = 'processed_images'
 output_directory = 'AI/datasets/OUT/images/good'
-input_dir = os.path.join(directory, "good")
+input_dir = os.path.join(directory, "test")
 process_images_from_directory(input_dir, output_directory)
